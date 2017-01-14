@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using TodoTest.Core.Interfaces;
 using TodoTest.Core.Model;
@@ -8,9 +10,9 @@ namespace TodoTest.Web.Controllers
 {
     public class TodoController : ApiController
     {
-        private readonly IRepository<ToDoItem> _repository;
+        private readonly IRepository<TodoItem> _repository;
 
-        public TodoController(IRepository<ToDoItem> repository)
+        public TodoController(IRepository<TodoItem> repository)
         {
             if (repository == null)
                 throw new ArgumentNullException(nameof(repository));
@@ -19,37 +21,69 @@ namespace TodoTest.Web.Controllers
         }
 
         // GET: api/Todo
-        public IEnumerable<ToDoItem> Get()
+        public IEnumerable<TodoItem> Get()
         {
-            return _repository.GetAll() ?? new ToDoItem[] {};
+            return _repository.GetAll() ?? new TodoItem[] {};
         }
 
         // GET: api/Todo/5
-        public ToDoItem Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return _repository.FindById(id);
+            var todo = _repository.FindById(id);
+            return todo == null ? Request.CreateResponse(HttpStatusCode.NotFound) : Request.CreateResponse(HttpStatusCode.OK, todo);
         }
 
         // POST: api/Todo
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]TodoItem value)
         {
-            var todo = new ToDoItem
+            try
             {
-                Title = value
-            };
-            _repository.Add(todo);
+                var saved = _repository.Add(value);
+                return Request.CreateResponse(HttpStatusCode.Created, saved);
+            }
+            catch
+            {
+                return BadRequestResponse();
+            }
         }
 
         // PUT: api/Todo/5
-        public void Put(int id, [FromBody]ToDoItem value)
+        public HttpResponseMessage Put(int id, [FromBody]TodoItem value)
         {
-            _repository.Update(value);
+            if (id != value.TodoItemId)
+            {
+                return BadRequestResponse();
+            }
+
+            try
+            {
+                _repository.Update(value);
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return BadRequestResponse();
+            }
         }
 
         // DELETE: api/Todo/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            _repository.Delete(id);
+            try
+            {
+                _repository.Delete(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return BadRequestResponse();
+            }
+        }
+
+        private HttpResponseMessage BadRequestResponse()
+        {
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
     }
 }

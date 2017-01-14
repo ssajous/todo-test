@@ -5,6 +5,6 @@ namespace TodoTest.DataAccess
 {
     public class TodoContext : DbContext
     {
-        public DbSet<ToDoItem> TodoItems { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
     }
 }

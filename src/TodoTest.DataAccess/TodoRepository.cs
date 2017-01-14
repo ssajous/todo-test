@@ -7,7 +7,7 @@ using TodoTest.Core.Model;
 
 namespace TodoTest.DataAccess
 {
-    public class TodoRepository : IRepository<ToDoItem>
+    public class TodoRepository : IRepository<TodoItem>
     {
         private readonly TodoContext _context;
 
@@ -19,31 +19,33 @@ namespace TodoTest.DataAccess
             _context = context;
         }
 
-        public IEnumerable<ToDoItem> GetAll()
+        public IEnumerable<TodoItem> GetAll()
         {
             return _context.TodoItems;
         }
 
-        public void Add(ToDoItem item)
+        public TodoItem Add(TodoItem item)
         {
             _context.TodoItems.Add(item);
             _context.SaveChanges();
+
+            return item;
         }
 
-        public void Update(ToDoItem item)
+        public void Update(TodoItem item)
         {
             _context.Entry(item).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public ToDoItem FindById(int id)
+        public TodoItem FindById(int id)
         {
             return _context.TodoItems.FirstOrDefault(t => t.TodoItemId == id);
         }
 
         public void Delete(int id)
         {
-            var todo = new ToDoItem {TodoItemId = id};
+            var todo = new TodoItem {TodoItemId = id};
             _context.Entry(todo).State = EntityState.Deleted;
             _context.SaveChanges();
         }

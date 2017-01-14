@@ -2,7 +2,7 @@
 
 namespace TodoTest.Core.Model
 {
-    public class ToDoItem
+    public class TodoItem
     {
         [Key]
         public int TodoItemId { get; set; }

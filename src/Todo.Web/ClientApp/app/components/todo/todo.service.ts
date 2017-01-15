@@ -24,7 +24,7 @@ export class TodoService {
         const url = `${this.todosUrl}/${id}`;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as Todo)
+            .then(response => response.json() as Todo)
             .catch(this.handleError);
     }
 
@@ -36,11 +36,11 @@ export class TodoService {
             .catch(this.handleError);
     }
 
-    create(name: string): Promise<Todo> {
+    create(title: string): Promise<Todo> {
         return this.http
-            .post(this.todosUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .post(this.todosUrl, JSON.stringify({ title: title }), { headers: this.headers })
             .toPromise()
-            .then(res => res.json().data)
+            .then(res => res.json())
             .catch(this.handleError);
     }
 

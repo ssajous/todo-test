@@ -1,3 +1,11 @@
-﻿<ul>
-    <li *ngFor="let todo of todos">{{todo.title}}</li>
+﻿<input [(ngModel)]="newTodoTitle" class="new-todo" placeholder="What to do?" autofocus="" (keyup.enter)="addTodo()">
+<ul class="todo-list">
+    <li *ngFor="let todo of todos" [class.completed]="todo.isCompleted" [class.editing]="todo.isEditing">
+        <div class="todo-item">
+            <input class="toggle" type="checkbox" (click)="toggleCompleted(todo)" [checked]="todo.isCompleted">
+            <label (dblclick)="editTodo(todo)">{{todo.title}}</label>
+            <button class="delete" (click)="delete(todo)"></button>
+        </div>
+        <input class="edit" *ngIf="todo.isEditing" [value]="todo.title" #editedtodo (blur)="stopEditingTodo(todo, editedtodo.value)" (keyup.enter)="stopEditingTodo(todo, editedtodo.value)" (keyup.escape)="cancelEditingTodo(todo)">
+    </li>
 </ul>

@@ -9,11 +9,11 @@ using Todo.Core.Model;
 namespace Todo.Web.Controllers
 {
     [Route("api/[controller]")]
-    public class TodoController : Controller
+    public class TodosController : Controller
     {
         private readonly IRepository<TodoItem> _repository;
 
-        public TodoController(IRepository<TodoItem> repository)
+        public TodosController(IRepository<TodoItem> repository)
         {
             if (repository == null)
                 throw new ArgumentNullException(nameof(repository));

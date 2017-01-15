@@ -11,6 +11,11 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Todo.Core", "Todo.Core\Todo
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Todo.DataAccess", "Todo.DataAccess\Todo.DataAccess.xproj", "{06260686-FB33-441A-B05E-986B50176381}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ED1981E8-74E9-4543-B76D-FCE33D246CBA}"
+	ProjectSection(SolutionItems) = preProject
+		db-publish.bat = db-publish.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

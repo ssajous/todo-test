@@ -11,6 +11,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+./wwwroot/app
 
 # NuGet Packages
 *.nupkg

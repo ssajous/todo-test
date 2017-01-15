@@ -7,15 +7,15 @@ namespace TodoTest.DataMigrations
     {
         public override void Up()
         {
-            Create.Table("TodoItem")
-                .WithColumn("TodoId").AsInt32().NotNullable().PrimaryKey().Identity()
+            Create.Table("TodoItems")
+                .WithColumn("TodoItemId").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Title").AsString(1024).NotNullable()
-                .WithColumn("isCompleted").AsBinary().NotNullable();
+                .WithColumn("IsCompleted").AsBoolean().NotNullable();
         }
 
         public override void Down()
         {
-            Delete.Table("TodoItem");
+            Delete.Table("TodoItems");
         }
     }
 }

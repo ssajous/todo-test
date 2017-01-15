@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Todo.Core.Interfaces;
+using Todo.Core.Model;
+using Todo.DataAccess;
 
 namespace Todo.Web
 {
@@ -30,6 +29,8 @@ namespace Todo.Web
         {
             // Add framework services.
             services.AddMvc();
+            services.AddScoped(typeof(TodoContext), typeof(TodoContext));
+            services.AddScoped(typeof(IRepository<TodoItem>), typeof(TodoRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

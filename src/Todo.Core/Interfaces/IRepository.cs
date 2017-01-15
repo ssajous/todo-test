@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TodoTest.Core.Interfaces
+namespace Todo.Core.Interfaces
 {
     public interface IRepository<T>
     {

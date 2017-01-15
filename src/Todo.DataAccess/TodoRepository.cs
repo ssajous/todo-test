@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using TodoTest.Core.Interfaces;
-using TodoTest.Core.Model;
+using Microsoft.EntityFrameworkCore;
+using Todo.Core.Interfaces;
+using Todo.Core.Model;
 
-namespace TodoTest.DataAccess
+namespace Todo.DataAccess
 {
     public class TodoRepository : IRepository<TodoItem>
     {
@@ -45,7 +45,7 @@ namespace TodoTest.DataAccess
 
         public void Delete(int id)
         {
-            var todo = new TodoItem {TodoItemId = id};
+            var todo = new TodoItem { TodoItemId = id };
             _context.Entry(todo).State = EntityState.Deleted;
             _context.SaveChanges();
         }

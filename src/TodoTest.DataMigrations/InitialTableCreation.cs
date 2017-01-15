@@ -10,7 +10,7 @@ namespace TodoTest.DataMigrations
             Create.Table("TodoItem")
                 .WithColumn("TodoId").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Title").AsString(1024).NotNullable()
-                .WithColumn("isCompleted").AsBinary().NotNullable();
+                .WithColumn("IsCompleted").AsBinary().NotNullable();
         }
 
         public override void Down()

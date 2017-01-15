@@ -1,7 +1,7 @@
-﻿using System.Data.Entity;
-using TodoTest.Core.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Todo.Core.Model;
 
-namespace TodoTest.DataAccess
+namespace Todo.DataAccess
 {
     public class TodoContext : DbContext
     {

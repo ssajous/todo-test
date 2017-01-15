@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,7 +30,9 @@ namespace Todo.Web
         {
             // Add framework services.
             services.AddMvc();
-            services.AddScoped(typeof(TodoContext), typeof(TodoContext));
+
+            const string connection = "Server=.;Database=TodoTest;Integrated Security=True";
+            services.AddDbContext<TodoContext>(options => options.UseSqlServer(connection));
             services.AddScoped(typeof(IRepository<TodoItem>), typeof(TodoRepository));
         }
 

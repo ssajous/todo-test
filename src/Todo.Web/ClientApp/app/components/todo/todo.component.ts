@@ -5,7 +5,8 @@ import { TodoService } from './todo.service';
 
 @Component({
     selector: 'todo',
-    template: require('./todo.component.html')
+    template: require('./todo.component.html'),
+    styles: [require('./todo.component.css')]
 })
 export class TodoComponent implements OnInit{
     public todos: Todo[] = [];
@@ -34,11 +35,12 @@ export class TodoComponent implements OnInit{
 
     public editTodo(todo: Todo): void {
         todo.isEditing = true;
+        this.clearOtherEdits(todo);
     }
 
     public stopEditingTodo(todo: Todo, value: string): void {
         todo.isEditing = false;
-        if (value == todo.title)
+        if (value === todo.title)
             return;
 
         todo.title = value;
@@ -59,5 +61,13 @@ export class TodoComponent implements OnInit{
         this.todoService.getTodos()
             .then(result => this.todos = result)
             .catch(error => console.log(error));
+    }
+
+    private clearOtherEdits(keep: Todo) {
+        for(var todo of this.todos) {
+            if (todo !== keep) {
+                todo.isEditing = false;
+            }
+        }
     }
 }

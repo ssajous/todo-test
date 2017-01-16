@@ -1,6 +1,6 @@
 {
-  "name": "Angular2Spa",
-  "version": "0.0.0",
+  "name": "todosample",
+  "version": "1.0.0",
   "dependencies": {
     "@angular/common": "2.0.0",
     "@angular/compiler": "2.0.0",
